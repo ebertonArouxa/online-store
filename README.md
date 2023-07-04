@@ -218,7 +218,7 @@ O atributo `data-testid="my-action"` servirá para que a React Testing Library (
   Você pode executar os testes para um único requisito passando, como parâmetro para o comando, o nome do arquivo de teste-alvo:
 
   ```bash
-  npm test src/__tests__/requirement1.test.js
+  npm test src/__tests__/requirement01.test.tsx
   ```
 
   ** :eyes: De olho na dica:** Desativando testes
@@ -345,7 +345,7 @@ Para isso, disponibilizamos este [protótipo do Figma](https://www.figma.com/fil
 
 :warning: **ATENÇÃO - 02** As imagens são meramente ilustrativas para visualizar o fluxo da aplicação. Portanto, os nomes devem seguir os requisitos, e não as imagens.
 
-:warning: **ATENÇÃO - 03** Para que os testes funcionem corretamente, é necessário que seu `BrowserRouter` fique dentro do arquivo `index.js`, envolvendo o componente <App />.
+:warning: **ATENÇÃO - 03** Para que os testes funcionem corretamente, é necessário que seu `BrowserRouter` fique dentro do arquivo `main.tsx`, envolvendo o componente <App />.
 
 :warning: **ATENÇÃO - 04** Não recomendamos utilizar o localStorage para guardar e compartilhar dados entre componentes. Faça isso apenas quando o requisito pedir explicitamente a persistência de dados.
 
@@ -546,7 +546,7 @@ Quando a pessoa usuária clicar em uma das categorias listadas na tela principal
 
   * Ao clicar em uma das categorias listadas, faça uma requisição à API do Mercado Livre e renderize na tela uma exibição resumida de todos os produtos retornados dessa categoria, contendo o nome, a imagem e o preço de cada produto.
   * Adicione o atributo `data-testid="product"` aos elementos que têm os dados dos produtos.
-  * :eyes: **De olho na dica**: Lembre-se de consultar os endpoints da API para encontrar a requisição de busca por categoria (mais informações na [documentação da API](#documentação-da-api-do-mercado-livre), na seção **Desenvolvimento**).
+  * :eyes: **De olho na dica**: Lembre-se de consultar os endpoints da API para encontrar a requisição de busca por categoria (mais informações na [documentação da API](#orientações), na seção **Desenvolvimento**).
 </details><br />
 
 <details>
@@ -817,6 +817,7 @@ A lista de avaliações já realizadas devem ser renderizadas na tela de detalhe
   - A avaliação continua após recarregar a página de detalhes do produto.
   - A avaliação feita para um produto específico não aparece na tela de detalhes de outro produto.
 </details>
+
 ## 13. Mostre junto ao ícone do carrinho a quantidade de produtos dentro dele em todas as telas em que ele aparece
 
 **PRIORIDADE 4**
@@ -943,7 +944,7 @@ Exiba o conteúdo do carrinho em um slider na lateral da tela, de modo que ele p
 
 <details><summary> Exemplo da listagem com carrinho populado</summary>
 
-  ![Tela - Listagem com carrinho populado.png](./wireframes/bonus_slider.1.png)
+  ![Tela - Listagem com carrinho populado.png](./wireframes/bonus_slider.2.png)
 </details>
 
 <details><summary> Exemplo da listagem com carrinho vazio</summary>
