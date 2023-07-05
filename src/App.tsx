@@ -1,22 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import { getCategories } from './services/api';
 
 function App() {
+  const [data, setData] = useState('');
+  useEffect(() => {
+    const fetchCategory = async () => {
+      const categories = await getCategories();
+      setData(categories);
+    };
+    fetchCategory();
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={ logo } className="App-logo" alt="logo" />
-        <p>Edit src/App.js and save to reload.</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>{ data }</h1>
     </div>
   );
 }
