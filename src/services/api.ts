@@ -1,3 +1,5 @@
+import { CategoryQuery, ProductID } from '../types';
+
 export async function getCategories() {
   // Implemente aqui
   const URL_CATEGORIES = 'https://api.mercadolibre.com/sites/MLB/categories';
@@ -5,11 +7,6 @@ export async function getCategories() {
   const data = await response.json();
   return data;
 }
-
-type CategoryQuery = {
-  categoryId: string;
-  query: string;
-};
 
 export async function getProductsFromCategoryAndQuery({
   categoryId, query }:CategoryQuery) {
@@ -19,10 +16,6 @@ export async function getProductsFromCategoryAndQuery({
   const data = await response.json();
   return data;
 }
-
-type ProductID = {
-  productId: string;
-};
 
 export async function getProductById({ productId }: ProductID) {
   // Esta implementação específica não é avaliada, mas pode ajudar você 🙂
