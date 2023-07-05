@@ -11,3 +11,10 @@ export type CategoryType = {
   id: string;
   name: string;
 };
+
+export interface ProductType {
+  title: string;
+  price: string;
+  thumbnail: string;
+  id: string;
+}
