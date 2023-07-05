@@ -1,5 +1,6 @@
 import logo from '../../assets/logo.svg';
 import cart from '../../assets/carrinho.svg';
+import { Link } from 'react-router-dom';
 
 function Header() {
   return (
@@ -9,9 +10,12 @@ function Header() {
         <button>Pesquisar</button>
       </label>
       <img src={ logo } alt="logo" />
-      <button>
+      <Link 
+        to="/cart"
+        data-testid="shopping-cart-button"
+      >
         <img src={ cart } alt="cart" />
-      </button>
+      </Link>
     </header>
   );
 }
