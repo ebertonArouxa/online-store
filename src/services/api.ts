@@ -1,5 +1,3 @@
-import { type } from "@testing-library/user-event/dist/type";
-
 export async function getCategories() {
   // Implemente aqui
   const URL_CATEGORIES = 'https://api.mercadolibre.com/sites/MLB/categories';
@@ -11,9 +9,10 @@ export async function getCategories() {
 type CategoryQuery = {
   categoryId: string;
   query: string;
-}
+};
 
-export async function getProductsFromCategoryAndQuery({ categoryId, query }:CategoryQuery ) {
+export async function getProductsFromCategoryAndQuery({
+  categoryId, query }:CategoryQuery) {
   // Implemente aqui! Quando o fizer, descomente os parâmetros que essa função recebe
   const URL_QUERY = `https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}&q=${query}`;
   const response = await fetch(URL_QUERY);
@@ -23,7 +22,7 @@ export async function getProductsFromCategoryAndQuery({ categoryId, query }:Cate
 
 type ProductID = {
   productId: string;
-}
+};
 
 export async function getProductById({ productId }: ProductID) {
   // Esta implementação específica não é avaliada, mas pode ajudar você 🙂
