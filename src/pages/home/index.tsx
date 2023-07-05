@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react';
-import Header from '../../components/Header';
 import { getCategories } from '../../services/api';
+import { CategoryType } from '../../types';
 
 function Home() {
-  const [data, setData] = useState([]);
+  const [categoryData, setcategoryData] = useState<CategoryType[]>([]);
   const [search, setSearch] = useState([]);
   useEffect(() => {
     const fetchCategory = async () => {
       const categories = await getCategories();
-      setData(categories);
+      setcategoryData(categories);
+      console.log(categoryData);
     };
     fetchCategory();
   }, []);
+
   return (
     <div>
       {search.length === 0 && (
@@ -19,6 +21,16 @@ function Home() {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
       )}
+      <aside>
+        { categoryData
+          .map((category) => (
+            <button
+              data-testid="category"
+              key={ category.id }
+            >
+              { category.name }
+            </button>))}
+      </aside>
     </div>
   );
 }
