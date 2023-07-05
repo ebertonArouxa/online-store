@@ -7,9 +7,9 @@ import Cart from './pages/cart';
 function App() {
   return (
     <Routes>
-      <Route path='/' element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path='/cart' element={<Cart />} />
+      <Route path="/" element={ <Layout /> }>
+        <Route index element={ <Home /> } />
+        <Route path="/cart" element={ <Cart /> } />
       </Route>
     </Routes>
   );
