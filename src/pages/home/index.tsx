@@ -14,7 +14,6 @@ function Home() {
   }, []);
   return (
     <div>
-      <Header />
       {search.length === 0 && (
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
