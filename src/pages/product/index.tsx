@@ -17,6 +17,14 @@ function Product() {
     fetchProduct();
   }, [id]);
 
+  useEffect(() => {
+    const productsFromStorage = localStorage.getItem('products');
+    if (productsFromStorage) {
+      const products = JSON.parse(productsFromStorage);
+      setCartProducts(products);
+    }
+  }, []);
+
   const handleAddProductToCart = () => {
     if (product) {
       setCartProducts((prev) => [...prev, product]);
