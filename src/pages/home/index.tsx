@@ -1,19 +1,28 @@
 import { useEffect, useState } from 'react';
-import { getCategories, getProductsFromTerm } from '../../services/api';
-import { CategoryType, ProductType } from '../../types';
 import Header from '../../components/Header';
+import {
+  getCategories,
+  getProductsFromTerm, listProductsByCategory,
+} from '../../services/api';
+import { CategoryType, ProductType } from '../../types';
 
 function Home() {
   const [categoryData, setcategoryData] = useState<CategoryType[]>([]);
-
   const [searchValue, setSearchValue] = useState('');
   const [products, setProducts] = useState<ProductType[]>([]);
 
   const handleClick = async () => {
-    const response = await getProductsFromTerm(searchValue);
-    const { results } = response;
+    const productsByCategory = await getProductsFromTerm(searchValue);
+    const filteredProducts = productsByCategory.results;
+    setProducts(filteredProducts);
+  };
+
+  const handleFilterByCategory = async (categoryId: string) => {
+    const categories = await listProductsByCategory(categoryId);
+    const { results } = categories;
     setProducts(results);
   };
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
   };
@@ -44,6 +53,7 @@ function Home() {
             <button
               data-testid="category"
               key={ category.id }
+              onClick={ () => handleFilterByCategory(category.id) }
             >
               { category.name }
             </button>))}
