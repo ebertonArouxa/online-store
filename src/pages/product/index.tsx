@@ -1,19 +1,31 @@
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { getProductById } from '../../services/api';
 import { ProductType } from '../../types';
+import { getProductById } from '../../services/api';
 
 function Product() {
   const { id } = useParams();
   const [product, setProduct] = useState<ProductType>();
+  const [cartProducts, setCartProducts] = useState<ProductType[]>([]);
 
   useEffect(() => {
     const fetchProduct = async () => {
       const productData = await getProductById({ productId: id });
+      console.log(productData);
       setProduct(productData);
     };
     fetchProduct();
-  }, []);
+  }, [id]);
+
+  const handleAddProductToCart = () => {
+    if (product) {
+      setCartProducts((prev) => [...prev, product]);
+    }
+  };
+
+  useEffect(() => {
+    localStorage.setItem('products', JSON.stringify(cartProducts));
+  }, [cartProducts]);
 
   return (
     product && (
@@ -37,13 +49,12 @@ function Product() {
           src={ product.thumbnail }
           alt={ product.title }
         />
-
-        <Link
-          to="/cart"
-          data-testid="shopping-cart-button"
+        <button
+          data-testid="product-add-to-cart"
+          onClick={ handleAddProductToCart }
         >
           Add to cart
-        </Link>
+        </button>
       </div>
     )
   );
