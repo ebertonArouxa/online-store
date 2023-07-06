@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import {
@@ -60,10 +61,23 @@ function Home() {
       </aside>
       <section>
         {products.map((product) => (
-          <div key={ product.id } data-testid="product">
+          <div
+            key={ product.id }
+            data-testid="product"
+          >
             <h1>{ product.title }</h1>
-            <h1>{ product.price }</h1>
+            <h1>
+              R$
+              {' '}
+              { product.price }
+            </h1>
             <img src={ product.thumbnail } alt={ product.title } />
+            <Link
+              data-testid="product-detail-link"
+              to={ `/product/${product.id}` }
+            >
+              link
+            </Link>
           </div>
         ))}
       </section>

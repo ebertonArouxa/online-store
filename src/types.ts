@@ -4,7 +4,7 @@ export type CategoryQuery = {
 };
 
 export type ProductID = {
-  productId: string;
+  productId: string | undefined;
 };
 
 export type CategoryType = {
