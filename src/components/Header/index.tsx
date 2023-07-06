@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import cart from '../../assets/carrinho.svg';
 import logo from '../../assets/logo.svg';
 
-type HeaderProps = {
+export type HeaderProps = {
   handleClick: () => void,
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
   searchValue: string,
