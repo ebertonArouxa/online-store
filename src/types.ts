@@ -17,4 +17,9 @@ export interface ProductType {
   price: string;
   thumbnail: string;
   id: string;
+  quantity: number
 }
+export type CartProduct = {
+  quantity: number;
+  price: number;
+};

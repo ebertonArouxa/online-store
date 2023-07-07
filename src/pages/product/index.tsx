@@ -1,7 +1,7 @@
-import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { ProductType } from '../../types';
+import { useParams } from 'react-router-dom';
 import { getProductById } from '../../services/api';
+import { ProductType } from '../../types';
 
 function Product() {
   const { id } = useParams();
@@ -11,7 +11,6 @@ function Product() {
   useEffect(() => {
     const fetchProduct = async () => {
       const productData = await getProductById({ productId: id });
-      console.log(productData);
       setProduct(productData);
     };
     fetchProduct();
@@ -26,8 +25,19 @@ function Product() {
   }, []);
 
   const handleAddProductToCart = () => {
-    if (product) {
-      setCartProducts((prev) => [...prev, product]);
+    if (!product) {
+      return;
+    }
+    const productAlreadyInCart = cartProducts
+      .find((productItem) => productItem.id === product.id);
+    if (productAlreadyInCart) {
+      const updateCartProducts = cartProducts
+        .map((productItem) => (productItem.id === productAlreadyInCart.id
+          ? { ...productItem, quantity: productItem.quantity + 1 } : productItem));
+      setCartProducts(updateCartProducts);
+    } else {
+      const newProduct = { ...product, quantity: 1 };
+      setCartProducts((productsInCart) => [...productsInCart, newProduct]);
     }
   };
 
