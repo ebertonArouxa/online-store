@@ -24,21 +24,25 @@ function Product() {
     }
   }, []);
 
-  const handleAddProductToCart = () => {
-    if (!product) {
-      return;
-    }
-    const productAlreadyInCart = cartProducts
-      .find((productItem) => productItem.id === product.id);
-    if (productAlreadyInCart) {
-      const updateCartProducts = cartProducts
-        .map((productItem) => (productItem.id === productAlreadyInCart.id
-          ? { ...productItem, quantity: productItem.quantity + 1 } : productItem));
-      setCartProducts(updateCartProducts);
-    } else {
-      const newProduct = { ...product, quantity: 1 };
-      setCartProducts((productsInCart) => [...productsInCart, newProduct]);
-    }
+  // const handleAddProductToCart = () => {
+  //   if (!product) {
+  //     return;
+  //   }
+  //   const productAlreadyInCart = cartProducts
+  //     .find((productItem) => productItem.id === product.id);
+  //   if (productAlreadyInCart) {
+  //     const updateCartProducts = cartProducts
+  //       .map((productItem) => (productItem.id === productAlreadyInCart.id
+  //         ? { ...productItem, quantity: productItem.quantity + 1 } : productItem));
+  //     setCartProducts(updateCartProducts);
+  //   } else {
+  //     const newProduct = { ...product, quantity: 1 };
+  //     setCartProducts((productsInCart) => [...productsInCart, newProduct]);
+  //   }
+  // };
+
+  const handleAddProductToCart = (productParam: ProductType) => {
+    setCartProducts((prev) => [...prev, productParam]);
   };
 
   useEffect(() => {
@@ -68,8 +72,8 @@ function Product() {
           alt={ product.title }
         />
         <button
-          data-testid="product-add-to-cart"
-          onClick={ handleAddProductToCart }
+          data-testid="product-detail-add-to-cart"
+          onClick={ () => handleAddProductToCart(product) }
         >
           Add to cart
         </button>
