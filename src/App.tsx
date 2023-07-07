@@ -37,7 +37,7 @@ function App() {
       setcategoryData(categories);
     };
     fetchCategory();
-  }, [categoryData]);
+  }, []);
 
   return (
     <Routes>

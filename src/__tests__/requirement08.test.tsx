@@ -13,12 +13,15 @@ describe('8 - Adicione produtos a partir da tela de listagem de produtos', () =>
   it('Adiciona um produto ao carrinho a partir da tela principal', async () => {
     renderWithRouter(<App />);
     expect(global.fetch).toHaveBeenCalled();
-
+    console.log(global.fetch, 1);
+    
     userEvent.click((await screen.findAllByTestId('category'))[0]);
     expect(global.fetch).toHaveBeenCalledTimes(2);
+    console.log(global.fetch, 2);
     
     userEvent.click((await screen.findAllByTestId('product-add-to-cart'))[0]);
     userEvent.click((await screen.findByTestId('shopping-cart-button')));
+    console.log(global.fetch, 3);
 
     expect(global.fetch).toHaveBeenCalledTimes(2);
     expect(screen.getAllByTestId('shopping-cart-product-name'));
