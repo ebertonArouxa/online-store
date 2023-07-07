@@ -1,41 +1,58 @@
 import { useEffect, useState } from 'react';
-import { ProductType } from '../../types';
+import { CartProduct, ProductType } from '../../types';
 
 function Cart() {
-  const [cartProducts, setCartProducts] = useState<ProductType[]>([]);
+  const [cartProducts, setCartProducts] = useState<{ [key: string]: CartProduct }>({});
+
   useEffect(() => {
     const productsFromStorage = localStorage.getItem('products');
     if (productsFromStorage) {
       const products = JSON.parse(productsFromStorage);
-      setCartProducts(products);
+      refatoreCartItems(products);
     }
   }, []);
 
+  const refatoreCartItems = (products: ProductType[]) => {
+    const countItems = products.reduce((acc, product) => {
+      const { title, price } = product;
+      acc[title] = acc[title] || { quantity: 0, price: 0 };
+      acc[title].quantity++;
+      acc[title].price += Number(price);
+      return acc;
+    }, {} as { [key: string]: CartProduct });
+    setCartProducts(countItems);
+  };
   return (
-    cartProducts.length === 0
+    Object.keys(cartProducts).length === 0
       ? (
         <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>
       ) : (
-        cartProducts.map((cartProduct) => (
-          <div
-            key={ cartProduct.id }
-          >
-            <img src={ cartProduct.thumbnail } alt="" />
-            <h2
-              data-testid="shopping-cart-product-name"
+        Object.keys(cartProducts).map((itemName) => {
+          const { quantity, price } = cartProducts[itemName];
+          return (
+            <div
+              key={ itemName }
             >
-              { cartProduct.title }
+              <h2
+                data-testid="shopping-cart-product-name"
+              >
+                { itemName }
 
-            </h2>
-            <h3
-              data-testid="shopping-cart-product-quantity"
-            >
-              Quantidade:
-              {' '}
-              {cartProduct.quantity}
-            </h3>
-          </div>
-        ))
+              </h2>
+              <h3>
+                Preço:
+                R$
+                {' '}
+                { price }
+              </h3>
+              <h3
+                data-testid="shopping-cart-product-quantity"
+              >
+                {quantity }
+              </h3>
+            </div>
+          );
+        })
       )
 
   );

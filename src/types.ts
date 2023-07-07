@@ -19,3 +19,7 @@ export interface ProductType {
   id: string;
   quantity: number
 }
+export type CartProduct = {
+  quantity: number;
+  price: number;
+};

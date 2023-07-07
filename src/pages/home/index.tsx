@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { CategoryType, ProductType } from '../../types';
 
 type HomeProps = {
@@ -12,8 +13,25 @@ function Home({
   categoryData,
   handleFilterByCategory,
   products,
-  searchValue,
-}: HomeProps) {
+  searchValue }: HomeProps) {
+  const [cartProducts, setCartProducts] = useState<ProductType[]>([]);
+
+  useEffect(() => {
+    const productsFromStorage = localStorage.getItem('products');
+    if (productsFromStorage) {
+      const productsLocate = JSON.parse(productsFromStorage);
+      setCartProducts(productsLocate);
+    }
+  }, []);
+
+  const handleAddProductToCart = (product: ProductType) => {
+    setCartProducts((prev) => [...prev, product]);
+  };
+
+  useEffect(() => {
+    localStorage.setItem('products', JSON.stringify(cartProducts));
+  }, [cartProducts]);
+
   return (
     <div>
       {searchValue.length === 0 && (
@@ -52,9 +70,9 @@ function Home({
             </Link>
             <button
               data-testid="product-add-to-cart"
+              onClick={ () => handleAddProductToCart(product) }
             >
               Add to cart
-
             </button>
           </div>
         ))}
