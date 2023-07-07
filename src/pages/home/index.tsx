@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 import { CategoryType, ProductType } from '../../types';
 
 type HomeProps = {
@@ -7,31 +6,16 @@ type HomeProps = {
   categoryData:CategoryType[],
   products:ProductType[]
   handleFilterByCategory:(categoryId: string) => void,
+  handleAddProductToCart:(prod:ProductType)=>void
 };
 
 function Home({
   categoryData,
   handleFilterByCategory,
   products,
-  searchValue }: HomeProps) {
-  const [cartProducts, setCartProducts] = useState<ProductType[]>([]);
-
-  useEffect(() => {
-    const productsFromStorage = localStorage.getItem('products');
-    if (productsFromStorage) {
-      const productsLocate = JSON.parse(productsFromStorage);
-      setCartProducts(productsLocate);
-    }
-  }, []);
-
-  const handleAddProductToCart = (product: ProductType) => {
-    setCartProducts((prev) => [...prev, product]);
-  };
-
-  useEffect(() => {
-    localStorage.setItem('products', JSON.stringify(cartProducts));
-  }, [cartProducts]);
-
+  searchValue,
+  handleAddProductToCart,
+}: HomeProps) {
   return (
     <div>
       {searchValue.length === 0 && (
@@ -51,28 +35,29 @@ function Home({
             </button>))}
       </aside>
       <section>
-        {products.map((product) => (
+        { products.map((prod) => (
           <div
-            key={ product.id }
+            key={ prod.id }
             data-testid="product"
           >
             <Link
               data-testid="product-detail-link"
-              to={ `/product/${product.id}` }
+              to={ `/product/${prod.id}` }
             >
-              <h1>{ product.title }</h1>
+              <h1>{ prod.title }</h1>
               <h1>
                 R$
                 {' '}
-                { product.price }
+                { prod.price }
               </h1>
-              <img src={ product.thumbnail } alt={ product.title } />
+              <img src={ prod.thumbnail } alt={ prod.title } />
             </Link>
             <button
               data-testid="product-add-to-cart"
-              onClick={ () => handleAddProductToCart(product) }
+              onClick={ () => handleAddProductToCart(prod) }
             >
               Add to cart
+
             </button>
           </div>
         ))}

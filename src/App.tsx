@@ -4,11 +4,11 @@ import './App.css';
 import Layout from './components/Layout';
 import Cart from './pages/cart';
 import Home from './pages/home';
-import Product from './pages/product';
 import {
   getCategories, getProductsFromTerm, listProductsByCategory,
 } from './services/api';
 import { CategoryType, ProductType } from './types';
+import Product from './pages/product';
 
 function App() {
   const [categoryData, setcategoryData] = useState<CategoryType[]>([]);
@@ -39,6 +39,37 @@ function App() {
     fetchCategory();
   }, []);
 
+  const [cartProducts, setCartProducts] = useState<ProductType[]>([]);
+
+  useEffect(() => {
+    const productsFromStorage = localStorage.getItem('products');
+    if (productsFromStorage) {
+      const productsLocal = JSON.parse(productsFromStorage);
+      setCartProducts(productsLocal);
+    }
+  }, []);
+
+  const handleAddProductToCart = (product:ProductType) => {
+    if (!product) {
+      return;
+    }
+    const productAlreadyInCart = cartProducts
+      .find((productItem) => productItem.id === product.id);
+    if (productAlreadyInCart) {
+      const updateCartProducts = cartProducts
+        .map((productItem) => (productItem.id === productAlreadyInCart.id
+          ? { ...productItem, quantity: productItem.quantity + 1 } : productItem));
+      setCartProducts(updateCartProducts);
+    } else {
+      const newProduct = { ...product, quantity: 1 };
+      setCartProducts((productsInCart) => [...productsInCart, newProduct]);
+    }
+  };
+
+  useEffect(() => {
+    localStorage.setItem('products', JSON.stringify(cartProducts));
+  }, [cartProducts]);
+
   return (
     <Routes>
       <Route
@@ -59,6 +90,7 @@ function App() {
               handleFilterByCategory={ handleFilterByCategory }
               products={ products }
               searchValue={ searchValue }
+              handleAddProductToCart={ handleAddProductToCart }
             />
         }
         />

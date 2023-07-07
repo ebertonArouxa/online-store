@@ -24,25 +24,21 @@ function Product() {
     }
   }, []);
 
-  // const handleAddProductToCart = () => {
-  //   if (!product) {
-  //     return;
-  //   }
-  //   const productAlreadyInCart = cartProducts
-  //     .find((productItem) => productItem.id === product.id);
-  //   if (productAlreadyInCart) {
-  //     const updateCartProducts = cartProducts
-  //       .map((productItem) => (productItem.id === productAlreadyInCart.id
-  //         ? { ...productItem, quantity: productItem.quantity + 1 } : productItem));
-  //     setCartProducts(updateCartProducts);
-  //   } else {
-  //     const newProduct = { ...product, quantity: 1 };
-  //     setCartProducts((productsInCart) => [...productsInCart, newProduct]);
-  //   }
-  // };
-
-  const handleAddProductToCart = (productParam: ProductType) => {
-    setCartProducts((prev) => [...prev, productParam]);
+  const handleAddProductToCart = () => {
+    if (!product) {
+      return;
+    }
+    const productAlreadyInCart = cartProducts
+      .find((productItem) => productItem.id === product.id);
+    if (productAlreadyInCart) {
+      const updateCartProducts = cartProducts
+        .map((productItem) => (productItem.id === productAlreadyInCart.id
+          ? { ...productItem, quantity: productItem.quantity + 1 } : productItem));
+      setCartProducts(updateCartProducts);
+    } else {
+      const newProduct = { ...product, quantity: 1 };
+      setCartProducts((productsInCart) => [...productsInCart, newProduct]);
+    }
   };
 
   useEffect(() => {
@@ -73,7 +69,7 @@ function Product() {
         />
         <button
           data-testid="product-detail-add-to-cart"
-          onClick={ () => handleAddProductToCart(product) }
+          onClick={ handleAddProductToCart }
         >
           Add to cart
         </button>
