@@ -17,4 +17,5 @@ export interface ProductType {
   price: string;
   thumbnail: string;
   id: string;
+  quantity: number
 }

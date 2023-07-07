@@ -1,13 +1,13 @@
+import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import { useEffect, useState } from 'react';
+import Layout from './components/Layout';
+import Cart from './pages/cart';
+import Home from './pages/home';
+import Product from './pages/product';
 import {
   getCategories, getProductsFromTerm, listProductsByCategory,
 } from './services/api';
-import Layout from './components/Layout';
-import Home from './pages/home';
-import Cart from './pages/cart';
-import Product from './pages/product';
 import { CategoryType, ProductType } from './types';
 
 function App() {

@@ -5,14 +5,15 @@ type HomeProps = {
   searchValue: string,
   categoryData:CategoryType[],
   products:ProductType[]
-  handleFilterByCategory:(categoryId: string) => void
+  handleFilterByCategory:(categoryId: string) => void,
 };
 
 function Home({
   categoryData,
   handleFilterByCategory,
   products,
-  searchValue }: HomeProps) {
+  searchValue,
+}: HomeProps) {
   return (
     <div>
       {searchValue.length === 0 && (
@@ -49,7 +50,12 @@ function Home({
               </h1>
               <img src={ product.thumbnail } alt={ product.title } />
             </Link>
-            <button data-testid="product-add-to-cart">Add to cart</button>
+            <button
+              data-testid="product-add-to-cart"
+            >
+              Add to cart
+
+            </button>
           </div>
         ))}
       </section>

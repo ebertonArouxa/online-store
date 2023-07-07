@@ -3,7 +3,6 @@ import { ProductType } from '../../types';
 
 function Cart() {
   const [cartProducts, setCartProducts] = useState<ProductType[]>([]);
-
   useEffect(() => {
     const productsFromStorage = localStorage.getItem('products');
     if (productsFromStorage) {
@@ -17,28 +16,26 @@ function Cart() {
       ? (
         <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>
       ) : (
-        cartProducts.map((cartProduct) => {
-          return (
-            <div
-              key={ cartProduct.id }
+        cartProducts.map((cartProduct) => (
+          <div
+            key={ cartProduct.id }
+          >
+            <img src={ cartProduct.thumbnail } alt="" />
+            <h2
+              data-testid="shopping-cart-product-name"
             >
-              <h2
-                data-testid="shopping-cart-product-name"
-              >
-                { cartProduct.title }
+              { cartProduct.title }
 
-              </h2>
-              <h3
-                data-testid="shopping-cart-product-quantity"
-              >
-                Quantidade:
-                {' '}
-                {}
-
-              </h3>
-            </div>
-          );
-        })
+            </h2>
+            <h3
+              data-testid="shopping-cart-product-quantity"
+            >
+              Quantidade:
+              {' '}
+              {cartProduct.quantity}
+            </h3>
+          </div>
+        ))
       )
 
   );
