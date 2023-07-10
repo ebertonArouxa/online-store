@@ -12,10 +12,11 @@ function Checkout() {
     phone: '',
     cep: '',
     address: '',
+    payment: '',
   });
   const [isInvalid, setIsInvalid] = useState<boolean>(true);
 
-  const { name, email, cpf, phone, cep, address } = data;
+  const { name, email, cpf, phone, cep, address, payment } = data;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -31,10 +32,10 @@ function Checkout() {
       const products = JSON.parse(productsFromStorage);
       setCartProducts(products);
     }
-  }, [cartProducts]);
+  }, []);
 
   const handleClick = () => {
-    if (name && email && cpf && phone && cep && address) {
+    if (name && email && cpf && phone && cep && address && payment) {
       setCartProducts([]);
       localStorage.setItem('products', JSON.stringify([]));
       navigate('/cart');
@@ -71,11 +72,11 @@ function Checkout() {
       }
       <form>
         <label
-          data-testid="checkout-fullname"
           htmlFor="name"
         >
           Nome:
           <input
+            data-testid="checkout-fullname"
             type="text"
             id="name"
             name="name"
@@ -84,11 +85,11 @@ function Checkout() {
           />
         </label>
         <label
-          data-testid="checkout-email"
           htmlFor="email"
         >
           Email:
           <input
+            data-testid="checkout-email"
             type="text"
             id="email"
             name="email"
@@ -97,11 +98,11 @@ function Checkout() {
           />
         </label>
         <label
-          data-testid="checkout-cpf"
           htmlFor="cpf"
         >
           CPF:
           <input
+            data-testid="checkout-cpf"
             type="text"
             id="cpf"
             name="cpf"
@@ -110,11 +111,11 @@ function Checkout() {
           />
         </label>
         <label
-          data-testid="checkout-phone"
           htmlFor="phone"
         >
           Telefone:
           <input
+            data-testid="checkout-phone"
             type="text"
             id="phone"
             name="phone"
@@ -123,11 +124,11 @@ function Checkout() {
           />
         </label>
         <label
-          data-testid="checkout-cep"
           htmlFor="cep"
         >
           CEP:
           <input
+            data-testid="checkout-cep"
             type="text"
             id="cep"
             name="cep"
@@ -136,11 +137,11 @@ function Checkout() {
           />
         </label>
         <label
-          data-testid="checkout-address"
           htmlFor="address"
         >
           Endereço:
           <input
+            data-testid="checkout-address"
             type="text"
             id="address"
             name="address"
@@ -149,33 +150,63 @@ function Checkout() {
           />
         </label>
         <label
-          data-testid="ticket-payment"
           htmlFor="ticket"
         >
           Boleto:
-          <input type="radio" name="payment" id="ticket" />
+          <input
+            data-testid="ticket-payment"
+            type="radio"
+            name="payment"
+            id="ticket"
+            value="ticket"
+            checked={ payment === 'ticket' }
+            onChange={ handleChange }
+          />
         </label>
         <label
-          data-testid="visa-payment"
           htmlFor="visa"
-
         >
           Visa:
-          <input type="radio" name="payment" id="visa" checked />
+          <input
+            data-testid="visa-payment"
+            type="radio"
+            name="payment"
+            id="visa"
+            value="visa"
+            checked={ payment === 'visa' }
+            onChange={ handleChange }
+
+          />
         </label>
         <label
-          data-testid="master-payment"
           htmlFor="master"
         >
           Master:
-          <input type="radio" name="payment" id="master" />
+          <input
+            data-testid="master-payment"
+            type="radio"
+            name="payment"
+            id="master"
+            value="master"
+            checked={ payment === 'master' }
+            onChange={ handleChange }
+
+          />
         </label>
         <label
-          data-testid="elo-payment"
           htmlFor="elo"
         >
           Elo:
-          <input type="radio" name="payment" id="elo" />
+          <input
+            data-testid="elo-payment"
+            type="radio"
+            name="payment"
+            id="elo"
+            value="elo"
+            checked={ payment === 'elo' }
+            onChange={ handleChange }
+
+          />
         </label>
         <button
           type="button"
