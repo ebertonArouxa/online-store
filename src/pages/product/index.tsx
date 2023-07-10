@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getProductById } from '../../services/api';
 import { ProductType } from '../../types';
+import Rating from '../../components/rating';
 import styles from './product.module.css';
 
 function Product() {
@@ -78,6 +79,7 @@ function Product() {
         >
           Add to cart
         </button>
+        <Rating productId={ product.id } />
       </div>
     )
   );
