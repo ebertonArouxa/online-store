@@ -1,9 +1,12 @@
 import { Outlet } from 'react-router-dom';
 import Header, { HeaderProps } from '../Header';
+import styles from './layout.module.css';
 
 function Layout({ handleChange, handleClick, searchValue }: HeaderProps) {
   return (
-    <div>
+    <div
+      className={ styles.container }
+    >
       <Header
         handleChange={ handleChange }
         handleClick={ handleClick }
