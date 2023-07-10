@@ -1,10 +1,9 @@
 header {
-  display: flex;
   align-items: center;
+  background-color: #003be5;
+  display: flex;
   justify-content: space-between;
-  background-color: #003BE5;
   padding: 1rem 2rem;
-
 }
 
 .searchButton {
@@ -15,15 +14,15 @@ header {
 
 .searchInput {
   background-color: transparent;
+  border: none;
+  color: #b0b3bb;
   font-size: 1.2rem;
   font-weight: 300;
-  color: #B0B3BB;
-  border: none;
   outline: none;
 }
 
 .search {
+  background-color: white;
   display: flex;
-  background-color: #ffffff;
   padding: 0.2rem;
 }
