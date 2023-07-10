@@ -9,6 +9,7 @@ import {
 } from './services/api';
 import { CategoryType, ProductType } from './types';
 import Product from './pages/product';
+import Checkout from './pages/checkout';
 
 function App() {
   const [categoryData, setcategoryData] = useState<CategoryType[]>([]);
@@ -102,6 +103,7 @@ function App() {
           }
         />
       </Route>
+      <Route path="/checkout" element={ <Checkout /> } />
     </Routes>
   );
 }

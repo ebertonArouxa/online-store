@@ -1,12 +1,13 @@
 import { ProductType } from '../../types';
 
- type CartProductProps = {
-   cartProducts:ProductType[],
-   handleDecreaseButton:(cartProduct:ProductType) => void,
-   handleDeleteButton:(cartProduct:ProductType) => void
-   handleIncreaseButton:(cartProduct:ProductType) => void
+type CartProductProps = {
+  cartProducts:ProductType[],
+  handleDecreaseButton:(cartProduct:ProductType) => void,
+  handleDeleteButton:(cartProduct:ProductType) => void
+  handleIncreaseButton:(cartProduct:ProductType) => void
 
- };
+};
+
 function CartProducts({
   cartProducts,
   handleDecreaseButton,
@@ -49,7 +50,6 @@ function CartProducts({
         onClick={ () => handleIncreaseButton(cartProduct) }
       >
         +
-
       </button>
     </div>
   )));
