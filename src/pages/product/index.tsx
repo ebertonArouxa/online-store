@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getProductById } from '../../services/api';
 import { ProductType } from '../../types';
 import Rating from '../../components/rating';
+import styles from './product.module.css';
 
 function Product() {
   const { id } = useParams();
@@ -48,27 +49,31 @@ function Product() {
 
   return (
     product && (
-      <div>
+      <div
+        className={ styles.container }
+      >
+
         <h2
+          className={ styles.title }
           data-testid="product-detail-name"
         >
           { product.title }
-
         </h2>
-        <h3
-          data-testid="product-detail-price"
-        >
-          {' '}
-          R$
-          {' '}
-          { product.price }
-        </h3>
         <img
+          className={ styles.img }
           data-testid="product-detail-image"
           src={ product.thumbnail }
           alt={ product.title }
         />
+        <h3
+          className={ styles.price }
+          data-testid="product-detail-price"
+        >
+          <span>R$ </span>
+          { Number(product.price).toFixed(2).replace('.', ',') }
+        </h3>
         <button
+          className={ styles.btn }
           data-testid="product-detail-add-to-cart"
           onClick={ handleAddProductToCart }
         >

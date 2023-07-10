@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { CategoryType, ProductType } from '../../types';
+import styles from './home.module.css';
 
 type HomeProps = {
   searchValue: string,
@@ -17,13 +18,13 @@ function Home({
   handleAddProductToCart,
 }: HomeProps) {
   return (
-    <div>
-      {searchValue.length === 0 && (
-        <p data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
-      )}
-      <aside>
+    <div
+      className={ styles.container }
+    >
+      <aside
+        className={ styles.aside }
+      >
+        <h2>Categorias</h2>
         { categoryData
           .map((category) => (
             <button
@@ -34,33 +35,42 @@ function Home({
               { category.name }
             </button>))}
       </aside>
-      <section>
-        { products.map((prod) => (
-          <div
-            key={ prod.id }
-            data-testid="product"
-          >
-            <Link
-              data-testid="product-detail-link"
-              to={ `/product/${prod.id}` }
-            >
-              <h1>{ prod.title }</h1>
-              <h1>
-                R$
-                {' '}
-                { prod.price }
-              </h1>
-              <img src={ prod.thumbnail } alt={ prod.title } />
-            </Link>
-            <button
-              data-testid="product-add-to-cart"
-              onClick={ () => handleAddProductToCart(prod) }
-            >
-              Add to cart
-
-            </button>
-          </div>
-        ))}
+      <section
+        className={ styles.section }
+      >
+        {searchValue.length === 0 && products.length === 0
+          ? (
+            <p data-testid="home-initial-message">
+              Digite algum termo de pesquisa ou escolha uma categoria.
+            </p>
+          )
+          : (
+            products.map((prod) => (
+              <div
+                className={ styles.product }
+                key={ prod.id }
+                data-testid="product"
+              >
+                <Link
+                  data-testid="product-detail-link"
+                  to={ `/product/${prod.id}` }
+                >
+                  <img src={ prod.thumbnail } alt={ prod.title } />
+                  <h2>{ prod.title }</h2>
+                  <h3>
+                    <span>R$</span>
+                    {' '}
+                    { Number(prod.price).toFixed(2).replace('.', ',') }
+                  </h3>
+                </Link>
+                <button
+                  data-testid="product-add-to-cart"
+                  onClick={ () => handleAddProductToCart(prod) }
+                >
+                  Adicionar ao Carrinho
+                </button>
+              </div>
+            )))}
       </section>
     </div>
   );
