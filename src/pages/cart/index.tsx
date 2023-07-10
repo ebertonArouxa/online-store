@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import CartProducts from '../../components/CartProducts';
 import { ProductType } from '../../types';
 
@@ -11,6 +12,10 @@ function Cart() {
       setCartProducts(products);
     }
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('products', JSON.stringify(cartProducts));
+  }, [cartProducts]);
 
   const handleIncreaseButton = (cartProduct:ProductType) => {
     const productToUpdate = cartProducts.find((prod) => prod.id === cartProduct.id);
@@ -43,13 +48,20 @@ function Cart() {
   }
 
   return (
-    <CartProducts
-      cartProducts={ cartProducts }
-      handleDecreaseButton={ handleDecreaseButton }
-      handleDeleteButton={ handleDeleteButton }
-      handleIncreaseButton={ handleIncreaseButton }
-    />
-
+    <div>
+      <CartProducts
+        cartProducts={ cartProducts }
+        handleDecreaseButton={ handleDecreaseButton }
+        handleDeleteButton={ handleDeleteButton }
+        handleIncreaseButton={ handleIncreaseButton }
+      />
+      <Link
+        to="/checkout"
+        data-testid="checkout-products"
+      >
+        Checkout
+      </Link>
+    </div>
   );
 }
 
