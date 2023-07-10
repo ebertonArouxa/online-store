@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import './App.css';
 import Layout from './components/Layout';
 import Cart from './pages/cart';
 import Home from './pages/home';

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import CartProducts from '../../components/CartProducts';
 import { ProductType } from '../../types';
+import styles from './cart.module.css';
 
 function Cart() {
   const [cartProducts, setCartProducts] = useState<ProductType[]>([]);
@@ -43,12 +44,30 @@ function Cart() {
   };
   if (cartProducts.length === 0) {
     return (
-      <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>
+      <div
+        className={ styles.empty }
+      >
+        <h2
+          className={ styles.emptyTitle }
+          data-testid="shopping-cart-empty-message"
+        >
+          Seu carrinho está vazio
+
+        </h2>
+      </div>
     );
   }
 
   return (
-    <div>
+    <div
+      className={ styles.container }
+    >
+      <h1
+        className={ styles.title }
+      >
+        Carrinho de compras
+
+      </h1>
       <CartProducts
         cartProducts={ cartProducts }
         handleDecreaseButton={ handleDecreaseButton }
@@ -56,10 +75,11 @@ function Cart() {
         handleIncreaseButton={ handleIncreaseButton }
       />
       <Link
+        className={ styles.btn }
         to="/checkout"
         data-testid="checkout-products"
       >
-        Checkout
+        Finalizar Compra
       </Link>
     </div>
   );
