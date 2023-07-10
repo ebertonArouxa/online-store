@@ -23,3 +23,9 @@ export type CartProduct = {
   quantity: number;
   price: number;
 };
+
+export type RatingType = {
+  email: string;
+  text?: string;
+  rating: string;
+};

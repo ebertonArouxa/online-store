@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getProductById } from '../../services/api';
 import { ProductType } from '../../types';
+import Rating from '../../components/rating';
 
 function Product() {
   const { id } = useParams();
@@ -73,6 +74,7 @@ function Product() {
         >
           Add to cart
         </button>
+        <Rating productId={ product.id } />
       </div>
     )
   );
