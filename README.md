@@ -20,7 +20,7 @@ Carrinho de Compras: O aplicativo permite que os usuários adicionem produtos ao
 
 ## Instruções de Instalação
 
-- Faça um git clone `git clone git@github.com:ebertonArouxa/StarWarsPlanets.git`
+- Faça um git clone `git clone git@github.com:ebertonArouxa/online-store.git`
 - Abra o repositório clonado
 - Instale as dependências `npm i`
 
