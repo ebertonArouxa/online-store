@@ -17,17 +17,12 @@ Carrinho de Compras: O aplicativo permite que os usuários adicionem produtos ao
 ## Conteúdo
 
 - [Instruções de Instalação](#instruções-de-instalação)
-- [Como Usar](#como-usar)
 
 ## Instruções de Instalação
 
 - Faça um git clone `git clone git@github.com:ebertonArouxa/StarWarsPlanets.git`
 - Abra o repositório clonado
 - Instale as dependências `npm i`
-
-## Como Usar
-
-Explique como usar. Forneça exemplos de código, capturas de tela ou demonstrações.
 
 ## Contribuição
 
